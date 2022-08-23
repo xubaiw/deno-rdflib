@@ -11,12 +11,12 @@ Deno.test("insert and find", async () => {
   const o = factory.namedNode("http://example.com/#o");
   const g = factory.namedNode("http://example.com");
   const q = factory.quad(s, p, o, g);
-  
+
   await store.insertOne(q);
-  
+
   const result = await store.findMany({
     subject: s,
   });
-  
+
   assertEquals(result, [q]);
 });

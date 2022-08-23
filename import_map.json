@@ -1,6 +1,7 @@
 {
   "imports": {
     "std/": "https://deno.land/std@0.152.0/",
-    "aloe": "https://deno.land/x/aloedb@0.9.0/mod.ts"
+    "aloe": "https://deno.land/x/aloedb@0.9.0/mod.ts",
+    "combine": "https://deno.land/x/combine@v0.0.9/mod.ts"
   }
 }

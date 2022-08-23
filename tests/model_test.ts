@@ -1,10 +1,9 @@
 import { assertEquals } from "std/testing/asserts.ts";
-import { equal, DataFactory } from "../src/model.ts";
+import { DataFactory, equal } from "../src/model.ts";
 
 const f = new DataFactory();
 
 Deno.test("model equal", () => {
-
   const a = f.quad(
     f.namedNode("http://example.com"),
     f.namedNode("http://example.com"),
