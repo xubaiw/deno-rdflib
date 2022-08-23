@@ -1,4 +1,4 @@
-import { assertEquals } from "std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std@0.152.0/testing/asserts.ts";
 import { DataFactory } from "../src/model.ts";
 import { Store } from "../src/store.ts";
 

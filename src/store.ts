@@ -1,4 +1,4 @@
-import { Database } from "aloe";
+import { Database } from "https://deno.land/x/aloedb@0.9.0/mod.ts";
 import { Quad } from "./model.ts";
 import parser from "./parsers/ntriples.ts";
 
@@ -11,7 +11,7 @@ export class Store extends Database<Quad> {
     const text = await Deno.readTextFile(path);
     const parsed = parser({
       text,
-      index: 0
+      index: 0,
     });
     if (parsed.success) {
       await this.insertMany(parsed.value);

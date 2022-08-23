@@ -1,4 +1,5 @@
 import {
+  charWhere,
   either,
   hex,
   many,
@@ -12,8 +13,7 @@ import {
   seq,
   str,
   surrounded,
-  charWhere,
-} from "combine";
+} from "https://deno.land/x/combine@v0.0.9/mod.ts";
 import { BlankNode, DataFactory, Literal, NamedNode, Quad } from "../model.ts";
 
 const f = new DataFactory();
@@ -53,7 +53,7 @@ const iriRef: Parser<NamedNode> = map(
     ),
     str(`>`),
   ),
-  (iri) => f.namedNode(iri)
+  (iri) => f.namedNode(iri),
 );
 
 const langTag: Parser<string> = map(
@@ -81,7 +81,7 @@ const stringLiteralQuote: Parser<string> = surrounded(
 );
 
 const pnCharsBase: Parser<string> = charWhere(
-  c => 
+  (c) =>
     65 <= c && c <= 90 ||
     97 <= c && c <= 122 ||
     0xC0 <= c && c <= 0xD6 ||
@@ -95,7 +95,7 @@ const pnCharsBase: Parser<string> = charWhere(
     0x3001 <= c && c <= 0xD7FF ||
     0xF900 <= c && c <= 0xFDCF ||
     0xFDF0 <= c && c <= 0xFFFD ||
-    0x10000 <= c && c <= 0xEFFFF
+    0x10000 <= c && c <= 0xEFFFF,
 );
 
 const pnCharsU: Parser<string> = oneOf(
@@ -166,7 +166,7 @@ const triple: Parser<Quad> = map(
     many(str(" ")),
     str(`.`),
   ),
-  ([,s,,p,,o,]) => f.quad(s, p, o, f.defaultGraph()),
+  ([, s, , p, , o]) => f.quad(s, p, o, f.defaultGraph()),
 );
 
 const ntriplesDoc: Parser<Quad[]> = map(

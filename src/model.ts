@@ -1,4 +1,4 @@
-import { equal as deepEqual } from "std/testing/asserts.ts";
+import { equal as deepEqual } from "https://deno.land/std@0.152.0/testing/asserts.ts";
 
 export type Term = {
   termType:
