@@ -63,7 +63,7 @@ export class DataFactory {
       value,
     };
   }
-  blankNode(value: string): BlankNode {
+  blankNode(value?: string): BlankNode {
     return {
       termType: "BlankNode",
       value: value || ("b" + (++this.#data.blankNodeCounter)),
@@ -73,7 +73,7 @@ export class DataFactory {
     let datatype, language;
     if (typeof languageOrDatatype === "string" || !languageOrDatatype) {
       datatype = this.namedNode(
-        "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+        "http://www.w3.org/2001/XMLSchema#string",
       );
       language = languageOrDatatype;
     } else {
