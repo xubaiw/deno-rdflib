@@ -9,13 +9,11 @@ export class Store extends Database<Quad> {
     super(path);
   }
   async parse(text: string) {
-    const parsed = parse({
-      text,
-      index: 0,
-    });
+    const parsed = parse(text);
     if (parsed.success) {
       await this.insertMany(parsed.value);
     }
+    return parsed.success;
   }
   async stringify(): Promise<string> {
     const quads = await this.findMany();
