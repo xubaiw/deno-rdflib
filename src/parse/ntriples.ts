@@ -48,6 +48,7 @@ type NTriplesLanguage = {
   PN_CHARS_U: Parser<string>;
   PN_CHARS: Parser<string>;
   HEX: Parser<string>;
+  WHITESPACE: Parser<string>;
 };
 
 /** The NTriples language parsers */
@@ -76,14 +77,15 @@ const ntripleLanguage = createLanguage<NTriplesLanguage>({
 ),
   triple: S => map(
   seq(
-    many(str(" ")),
+    many(S.WHITESPACE),
     S.subject,
-    many(str(" ")),
+    many(S.WHITESPACE),
     S.predicate,
-    many(str(" ")),
+    many(S.WHITESPACE),
     S.object,
-    many(str(" ")),
+    many(S.WHITESPACE),
     str(`.`),
+    many(S.WHITESPACE),
   ),
   ([, s, , p, , o]) => F.quad(s, p, o, F.defaultGraph()),
 ),
@@ -225,6 +227,7 @@ const ntripleLanguage = createLanguage<NTriplesLanguage>({
       regex(/[\u203F-\u2040]/, `expect [#x203F-#x2040]`),
     ),
   HEX: () => hex(),
+  WHITESPACE: () => oneOf("\u0009", "\u0020"),
 });
 
 export default ntripleLanguage.ntriplesDoc;
