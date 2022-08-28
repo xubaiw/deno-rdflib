@@ -60,21 +60,21 @@ type NTriplesLanguage = {
 
 /** The NTriples language parsers */
 export const ntripleLanguage = createLanguage<NTriplesLanguage>({
-  ntriplesDoc: (S) =>
+  ntriplesDoc: (NT) =>
     map(
       seq(
-        optional(S.EOL),
+        optional(NT.EOL),
         sepBy(
           seq(
-            S.WHITESPACES,
-            optional(S.triple),
-            S.WHITESPACES,
-            optional(S.COMMENT),
-            S.WHITESPACES,
+            NT.WHITESPACES,
+            optional(NT.triple),
+            NT.WHITESPACES,
+            optional(NT.COMMENT),
+            NT.WHITESPACES,
           ),
-          S.EOL,
+          NT.EOL,
         ),
-        optional(S.EOL),
+        optional(NT.EOL),
       ),
       ([, arr]) => {
         const quads = [];
@@ -86,25 +86,25 @@ export const ntripleLanguage = createLanguage<NTriplesLanguage>({
         return [];
       },
     ),
-  triple: (S) =>
+  triple: (NT) =>
     map(
       seq(
-        S.subject,
-        S.WHITESPACES,
-        S.predicate,
-        S.WHITESPACES,
-        S.object,
-        S.WHITESPACES,
+        NT.subject,
+        NT.WHITESPACES,
+        NT.predicate,
+        NT.WHITESPACES,
+        NT.object,
+        NT.WHITESPACES,
         str(`.`),
       ),
       ([s, , p, , o]) => F.quad(s, p, o, F.defaultGraph()),
     ),
-  subject: (S) =>
+  subject: (NT) =>
     either(
-      S.IRIREF,
-      S.BLANK_NODE_LABEL,
+      NT.IRIREF,
+      NT.BLANK_NODE_LABEL,
     ),
-  predicate: (S) => S.IRIREF,
+  predicate: (NT) => NT.IRIREF,
   object: (S) =>
     either(
       S.IRIREF,
@@ -113,14 +113,14 @@ export const ntripleLanguage = createLanguage<NTriplesLanguage>({
         S.literal,
       ),
     ),
-  literal: (S) =>
+  literal: (NT) =>
     map(
       seq(
-        S.STRING_LITERAL_QUOTE,
+        NT.STRING_LITERAL_QUOTE,
         optional(
           either(
-            S.LANGTAG,
-            map(seq(str(`^^`), S.IRIREF), ([, iri]) => iri),
+            NT.LANGTAG,
+            map(seq(str(`^^`), NT.IRIREF), ([, iri]) => iri),
           ),
         ),
       ),
@@ -177,27 +177,27 @@ export const ntripleLanguage = createLanguage<NTriplesLanguage>({
     };
   },
 
-  STRING_LITERAL_QUOTE: (S) =>
+  STRING_LITERAL_QUOTE: (NT) =>
     surrounded(
       str(`"`),
       mapJoin(
         many(
           oneOf(
             charNotInRange(0x22, 0x5C, 0xA, 0xD),
-            S.ECHAR,
-            S.UCHAR,
+            NT.ECHAR,
+            NT.UCHAR,
           ),
         ),
       ),
       str(`"`),
     ),
-  BLANK_NODE_LABEL: (S) => {
+  BLANK_NODE_LABEL: (NT) => {
     return (ctx) => {
       const result = seq(
         str(`_:`),
-        either(S.PN_CHARS_U, charInRange(["0", "9"])),
+        either(NT.PN_CHARS_U, charInRange(["0", "9"])),
         optional(
-          mapJoin(many(either(S.PN_CHARS, str(`.`)))),
+          mapJoin(many(either(NT.PN_CHARS, str(`.`)))),
         ),
       )(ctx);
       if (!result.success) return result;
@@ -213,18 +213,18 @@ export const ntripleLanguage = createLanguage<NTriplesLanguage>({
       }
     };
   },
-  UCHAR: (S) =>
+  UCHAR: (NT) =>
     either(
       mapJoin(
         seq(
           str(`\\u`),
-          mapJoin(repeat(4, S.HEX)),
+          mapJoin(repeat(4, NT.HEX)),
         ),
       ),
       mapJoin(
         seq(
           str(`\\U`),
-          mapJoin(repeat(8, S.HEX)),
+          mapJoin(repeat(8, NT.HEX)),
         ),
       ),
     ),
@@ -252,15 +252,15 @@ export const ntripleLanguage = createLanguage<NTriplesLanguage>({
       [0xFDF0, 0xFFFD],
       [0x10000, 0xEFFFF],
     ),
-  PN_CHARS_U: (S) =>
+  PN_CHARS_U: (NT) =>
     oneOf(
-      S.PN_CHARS_BASE,
+      NT.PN_CHARS_BASE,
       str(`_`),
       str(`:`),
     ),
-  PN_CHARS: (S) =>
+  PN_CHARS: (NT) =>
     oneOf(
-      S.PN_CHARS_U,
+      NT.PN_CHARS_U,
       charInRange("-", ["0", "9"], 0xB7, [0x300, 0x36F], [0x203F, 0x2040]),
     ),
   HEX: () => charInRange(["0", "9"], ["A", "F"], ["a", "f"]),
