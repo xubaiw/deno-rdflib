@@ -1,6 +1,7 @@
 import {
   createLanguage,
   either,
+  failure,
   many,
   map,
   mapJoin,
@@ -139,9 +140,9 @@ export const ntripleLanguage = createLanguage<NTriplesLanguage>({
       ([, x]) => x,
     ),
   EOL: () => skipMany1(charInRange(0xD, 0xA)),
-  IRIREF: (S) =>
-    map(
-      surrounded(
+  IRIREF: (S) => {
+    return (ctx) => {
+      const result = surrounded(
         str(`<`),
         mapJoin(
           many(
@@ -163,9 +164,19 @@ export const ntripleLanguage = createLanguage<NTriplesLanguage>({
           ),
         ),
         str(`>`),
-      ),
-      (iri) => F.namedNode(iri),
-    ),
+      )(ctx);
+      if (!result.success) return result;
+      const iri = result.value;
+      // HACK: better iri detection
+      try {
+        new URL(iri);
+        return success(result.ctx, F.namedNode(iri));
+      } catch {
+        return failure(ctx, `"${iri}" is not a valid absolute iri`);
+      }
+    };
+  },
+
   STRING_LITERAL_QUOTE: (S) =>
     surrounded(
       str(`"`),

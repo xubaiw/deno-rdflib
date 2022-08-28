@@ -72,9 +72,9 @@ Deno.test("test language", async (t) => {
     `IRIREF #3`,
     testPositive(S.IRIREF, `<https://example.com/#abc>`),
   );
-  await t.step(`IRIREF #4`, testPositive(S.IRIREF, `<#abc>`));
-  await t.step(`IRIREF #5`, testPositive(S.IRIREF, `<./foo.ttl#abc>`));
-  await t.step(`IRIREF #6`, testPositive(S.IRIREF, `<../..>`));
+  await t.step(`IRIREF #4`, testPositive(S.IRIREF, `<foo:abc>`));
+  await t.step(`IRIREF #5`, testPositive(S.IRIREF, `<foo:./foo.ttl#abc>`));
+  await t.step(`IRIREF #6`, testPositive(S.IRIREF, `<foo:../..>`));
   // eol
   await t.step(`EOL #1`, testPositive(S.EOL, `\u000D`));
   await t.step(`EOL #2`, testPositive(S.EOL, `\r`));
@@ -87,35 +87,35 @@ Deno.test("test language", async (t) => {
   await t.step(`LANGTAG #3`, testPositive(S.LANGTAG, `@zh-CN-UTF8`));
   // literal
   await t.step(`literal #1`, testPositive(S.literal, `"foo"`));
-  await t.step(`literal #2`, testPositive(S.literal, `"bar"^^<#abc>`));
+  await t.step(`literal #2`, testPositive(S.literal, `"bar"^^<foo:#abc>`));
   await t.step(`literal #3`, testPositive(S.literal, `"baz"@zh`));
   // object
-  await t.step(`object #1`, testPositive(S.object, `"foo^^<#abc>"`));
-  await t.step(`object #2`, testPositive(S.object, `<#abc>`));
+  await t.step(`object #1`, testPositive(S.object, `"foo^^<foo:#abc>"`));
+  await t.step(`object #2`, testPositive(S.object, `<foo:#abc>`));
   await t.step(`object #3`, testPositive(S.object, `_:xyz`));
   // predicate
-  await t.step(`predicate #1`, testPositive(S.predicate, `<#abc>`));
+  await t.step(`predicate #1`, testPositive(S.predicate, `<foo:#abc>`));
   // subject
   await t.step(`subject #1`, testPositive(S.subject, `_:foo`));
-  await t.step(`subject #2`, testPositive(S.subject, `<#abc>`));
+  await t.step(`subject #2`, testPositive(S.subject, `<foo:#abc>`));
   // triple
-  await t.step(`triple #1`, testPositive(S.triple, `<#foo> <#bar> <#baz>.`));
-  await t.step(`triple #2`, testPositive(S.triple, `<#foo> <#bar> "baz"@zh.`));
-  await t.step(`triple #3`, testPositive(S.triple, `<#foo> <#bar>\t<#baz>\t.`));
+  await t.step(`triple #1`, testPositive(S.triple, `<foo:#foo> <foo:#bar> <foo:#baz>.`));
+  await t.step(`triple #2`, testPositive(S.triple, `<foo:#foo> <foo:#bar> "baz"@zh.`));
+  await t.step(`triple #3`, testPositive(S.triple, `<foo:#foo> <foo:#bar>\t<foo:#baz>\t.`));
   // NTriples doc
   await t.step(
     `ntripleDoc #1`,
-    testPositive(S.ntriplesDoc, `<#foo>  <#bar>   <#baz>   .   `),
+    testPositive(S.ntriplesDoc, `<foo:#foo>  <foo:#bar>   <foo:#baz>   .   `),
   );
   await t.step(
     `ntripleDoc #2`,
-    testPositive(S.ntriplesDoc, `<#foo> <#bar> <#baz> . # foo bar baz`),
+    testPositive(S.ntriplesDoc, `<foo:#foo> <foo:#bar> <foo:#baz> . # foo bar baz`),
   );
   await t.step(
     `ntripleDoc #3`,
     testPositive(
       S.ntriplesDoc,
-      `#123\n<#foo> <#bar> <#baz> . #233 \n <#a> <#b> <#c>.`,
+      `#123\n<foo:#foo> <foo:#bar> <foo:#baz> . #233 \n <foo:#a> <foo:#b> <foo:#c>.`,
     ),
   );
 });
