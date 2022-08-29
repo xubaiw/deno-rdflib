@@ -15,7 +15,7 @@ import {
 } from "../model.ts";
 
 /* The NTriples language type definition */
-type Language = {
+export type Language = {
   ntriplesDoc: Parser<Quad[]>;
   triple: Parser<Quad>;
 };
