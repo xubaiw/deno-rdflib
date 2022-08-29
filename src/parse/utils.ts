@@ -13,6 +13,7 @@ import {
   assertEquals,
   assertFalse,
 } from "https://deno.land/std@0.153.0/testing/asserts.ts";
+import { DataFactory } from "../model.ts";
 
 export type Range = (number | string | [number | string, number | string])[];
 type CodeRange = (number | [number, number])[];
@@ -106,6 +107,7 @@ export function testNegative<T>(
     assertFalse(result.success);
   };
 }
+
 function pointOutError(ctx: Context) {
   let countdown: number | null = ctx.index;
   const splits = ctx.text.split("\n");
@@ -119,5 +121,18 @@ function pointOutError(ctx: Context) {
         countdown -= line.length;
       }
     }
+  }
+}
+
+export const factory = new DataFactory();
+
+export function isValidIRI(iri: string, base?: string): boolean {
+  const i = iri + base ?? "";
+  // HACK better IRI detection
+  try {
+    new URL(i);
+    return true;
+  } catch {
+    return false;
   }
 }

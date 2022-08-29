@@ -1,4 +1,4 @@
-import { nquadsLanguage as NQ } from "./nquads.ts";
+import { language as NQ } from "./nquads.ts";
 import { testNegative, testPositive } from "./utils.ts";
 
 Deno.test("test language", async (t) => {
@@ -21,7 +21,10 @@ Deno.test("test language", async (t) => {
   );
   await t.step(
     `nquadsDoc #2`,
-    testPositive(NQ.nquadsDoc, `<foo:#foo>  <foo:#bar>   <foo:#baz> <foo:graph>  .   `),
+    testPositive(
+      NQ.nquadsDoc,
+      `<foo:#foo>  <foo:#bar>   <foo:#baz> <foo:graph>  .   `,
+    ),
   );
 });
 

@@ -9,39 +9,32 @@ import {
   seq,
   str,
 } from "https://deno.land/x/combine@v0.0.9/mod.ts";
-import { parse } from "./utils.ts";
-import { ntripleLanguage as NT } from "./ntriples.ts";
-import {
-  DataFactory,
-  Quad,
-  QuadGraph,
-} from "../model.ts";
+import { parse, factory as F } from "./utils.ts";
+import { language as CM } from "./common.ts";
+import { Quad, QuadGraph } from "../model.ts";
 
-/** The data factory */
-const F = new DataFactory();
-
-type NQuadsLanguage = {
+export type Language = {
   nquadsDoc: Parser<Quad[]>;
   quad: Parser<Quad>;
   graph: Parser<QuadGraph>;
 };
 
-export const nquadsLanguage = createLanguage<NQuadsLanguage>({
-  nquadsDoc: (NQ) =>
+export const language = createLanguage<Language>({
+  nquadsDoc: (L) =>
     map(
       seq(
-        optional(NT.EOL),
+        optional(CM.EOL),
         sepBy(
           seq(
-            NT.WHITESPACES,
-            optional(NQ.quad),
-            NT.WHITESPACES,
-            optional(NT.COMMENT),
-            NT.WHITESPACES,
+            CM.WHITESPACES,
+            optional(L.quad),
+            CM.WHITESPACES,
+            optional(CM.COMMENT),
+            CM.WHITESPACES,
           ),
-          NT.EOL,
+          CM.EOL,
         ),
-        optional(NT.EOL),
+        optional(CM.EOL),
       ),
       ([, arr]) => {
         const quads = [];
@@ -53,17 +46,17 @@ export const nquadsLanguage = createLanguage<NQuadsLanguage>({
         return [];
       },
     ),
-  quad: (NQ) =>
+  quad: (L) =>
     map(
       seq(
-        NT.subject,
-        NT.WHITESPACES,
-        NT.predicate,
-        NT.WHITESPACES,
-        NT.object,
-        NT.WHITESPACES,
-        NQ.graph,
-        NT.WHITESPACES,
+        CM.subject,
+        CM.WHITESPACES,
+        CM.predicate,
+        CM.WHITESPACES,
+        CM.object,
+        CM.WHITESPACES,
+        L.graph,
+        CM.WHITESPACES,
         str(`.`),
       ),
       ([s, , p, , o, , g]) => F.quad(s, p, o, g),
@@ -72,9 +65,9 @@ export const nquadsLanguage = createLanguage<NQuadsLanguage>({
     map(
       optional(
         either(
-          NT.IRIREF,
-          NT.BLANK_NODE_LABEL
-        )
+          CM.IRIREF,
+          CM.BLANK_NODE_LABEL,
+        ),
       ),
       (iri) => {
         if (!iri) return F.defaultGraph();
@@ -83,7 +76,6 @@ export const nquadsLanguage = createLanguage<NQuadsLanguage>({
     ),
 });
 
-
 export default function (text: string): Result<Quad[]> {
-  return parse(nquadsLanguage.nquadsDoc, text);
+  return parse(language.nquadsDoc, text);
 }
