@@ -2,192 +2,198 @@
  * @file shacl vocabulary
  */
 
-import { NamedNode } from "../types.ts";
+import { NamedNode } from "../model.ts";
 
-export default function sh(name: string): NamedNode {
+function sh(name: string): NamedNode {
   return {
     tag: "named",
     iri: "http://www.w3.org/ns/shacl#" + name,
   };
 }
 
-export const ALTERNATIVE_PATH = sh("alternativePath")  
-export const ANNOTATION_PROPERTY = sh("annotationProperty")  
-export const ANNOTATION_VALUE = sh("annotationValue")  
-export const ANNOTATION_VAR_NAME = sh("annotationVarName")  
-export const ASK = sh("ask")  
-export const CLOSED = sh("closed")  
-export const CONDITION = sh("condition")  
-export const CONFORMS = sh("conforms")  
-export const CONSTRUCT = sh("construct")  
-export const DATATYPE = sh("datatype")  
-export const DEACTIVATED = sh("deactivated")  
-export const DECLARE = sh("declare")  
-export const DEFAUKT_VALUE = sh("defaultValue")  
-export const DESCRIPTION = sh("description")  
-export const DETAIL = sh("detail")  
-export const DISJOINT = sh("disjoint")  
-export const ENTAILMENT = sh("entailment")  
-export const EQUALS = sh("equals")  
-export const expression = sh("expression")  
-export const filterShape = sh("filterShape")  
-export const flags = sh("flags")  
-export const focusNode = sh("focusNode")  
-export const group = sh("group")  
-export const hasValue = sh("hasValue")  
-export const ignoredProperties = sh("ignoredProperties")  
-export const intersection = sh("intersection")  
-export const inversePath = sh("inversePath")  
-export const js = sh("js")  
-export const jsFunctionName = sh("jsFunctionName")  
-export const jsLibrary = sh("jsLibrary")  
-export const jsLibraryURL = sh("jsLibraryURL")  
-export const labelTemplate = sh("labelTemplate")  
-export const languageIn = sh("languageIn")  
-export const lessThan = sh("lessThan")  
-export const lessThanOrEquals = sh("lessThanOrEquals")  
-export const maxCount = sh("maxCount")  
-export const maxExclusive = sh("maxExclusive")  
-export const maxInclusive = sh("maxInclusive")  
-export const maxLength = sh("maxLength")  
-export const message = sh("message")  
-export const minCount = sh("minCount")  
-export const minExclusive = sh("minExclusive")  
-export const minInclusive = sh("minInclusive")  
-export const minLength = sh("minLength")  
-export const name = sh("name")  
-export const namespace = sh("namespace")  
-export const node = sh("node")  
-export const nodeKind = sh("nodeKind")  
-export const nodeValidator = sh("nodeValidator")  
-export const nodes = sh("nodes")  
-export const object = sh("object")  
-export const oneOrMorePath = sh("oneOrMorePath")  
-export const optional = sh("optional")  
-export const order = sh("order")  
-export const parameter = sh("parameter")  
-export const path = sh("path")  
-export const pattern = sh("pattern")  
-export const predicate = sh("predicate")  
-export const prefix = sh("prefix")  
-export const prefixes = sh("prefixes")  
-export const property = sh("property")  
-export const propertyValidator = sh("propertyValidator")  
-export const qualifiedMaxCount = sh("qualifiedMaxCount")  
-export const qualifiedMinCount = sh("qualifiedMinCount")  
-export const qualifiedValueShape = sh("qualifiedValueShape")  
-export const qualifiedValueShapesDisjoint = sh("qualifiedValueShapesDisjoint")  
-export const result = sh("result")  
-export const resultAnnotation = sh("resultAnnotation")  
-export const resultMessage = sh("resultMessage")  
-export const resultPath = sh("resultPath")  
-export const resultSeverity = sh("resultSeverity")  
-export const returnType = sh("returnType")  
-export const rule = sh("rule")  
-export const select = sh("select")  
-export const severity = sh("severity")  
-export const shapesGraph = sh("shapesGraph")  
-export const shapesGraphWellFormed = sh("shapesGraphWellFormed")  
-export const sourceConstraint = sh("sourceConstraint")  
-export const sourceConstraintComponent = sh("sourceConstraintComponent")  
-export const sourceShape = sh("sourceShape")  
-export const sparql = sh("sparql")  
-export const subject = sh("subject")  
-export const suggestedShapesGraph = sh("suggestedShapesGraph")  
-export const target = sh("target")  
-export const targetClass = sh("targetClass")  
-export const targetNode = sh("targetNode")  
-export const targetObjectsOf = sh("targetObjectsOf")  
-export const targetSubjectsOf = sh("targetSubjectsOf")  
-export const union = sh("union")  
-export const uniqueLang = sh("uniqueLang")  
-export const update = sh("update")  
-export const validator = sh("validator")  
-export const value = sh("value")  
-export const xone = sh("xone")  
-export const zeroOrMorePath = sh("zeroOrMorePath")  
-export const zeroOrOnePath = sh("zeroOrOnePath")  
-export const AbstractResult = sh("AbstractResult")  
-export const ConstraintComponent = sh("ConstraintComponent")  
-export const Function = sh("Function")  
-export const JSConstraint = sh("JSConstraint")  
-export const JSExecutable = sh("JSExecutable")  
-export const JSFunction = sh("JSFunction")  
-export const JSLibrary = sh("JSLibrary")  
-export const JSRule = sh("JSRule")  
-export const JSTarget = sh("JSTarget")  
-export const JSTargetType = sh("JSTargetType")  
-export const JSValidator = sh("JSValidator")  
-export const NodeKind = sh("NodeKind")  
-export const NodeShape = sh("NodeShape")  
-export const Parameter = sh("Parameter")  
-export const Parameterizable = sh("Parameterizable")  
-export const PrefixDeclaration = sh("PrefixDeclaration")  
-export const PropertyGroup = sh("PropertyGroup")  
-export const PropertyShape = sh("PropertyShape")  
-export const ResultAnnotation = sh("ResultAnnotation")  
-export const Rule = sh("Rule")  
-export const SPARQLAskExecutable = sh("SPARQLAskExecutable")  
-export const SPARQLAskValidator = sh("SPARQLAskValidator")  
-export const SPARQLConstraint = sh("SPARQLConstraint")  
-export const SPARQLConstructExecutable = sh("SPARQLConstructExecutable")  
-export const SPARQLExecutable = sh("SPARQLExecutable")  
-export const SPARQLFunction = sh("SPARQLFunction")  
-export const SPARQLRule = sh("SPARQLRule")  
-export const SPARQLSelectExecutable = sh("SPARQLSelectExecutable")  
-export const SPARQLSelectValidator = sh("SPARQLSelectValidator")  
-export const SPARQLTarget = sh("SPARQLTarget")  
-export const SPARQLTargetType = sh("SPARQLTargetType")  
-export const SPARQLUpdateExecutable = sh("SPARQLUpdateExecutable")  
-export const Severity = sh("Severity")  
-export const Shape = sh("Shape")  
-export const Target = sh("Target")  
-export const TargetType = sh("TargetType")  
-export const TripleRule = sh("TripleRule")  
-export const ValidationReport = sh("ValidationReport")  
-export const ValidationResult = sh("ValidationResult")  
-export const Validator = sh("Validator")  
-export const this = sh("this")  
-export const AndConstraintComponent = sh("AndConstraintComponent")  
-export const ClassConstraintComponent = sh("ClassConstraintComponent")  
-export const ClosedConstraintComponent = sh("ClosedConstraintComponent")  
-export const DatatypeConstraintComponent = sh("DatatypeConstraintComponent")  
-export const DisjointConstraintComponent = sh("DisjointConstraintComponent")  
-export const EqualsConstraintComponent = sh("EqualsConstraintComponent")  
-export const ExpressionConstraintComponent = sh("ExpressionConstraintComponent")  
-export const HasValueConstraintComponent = sh("HasValueConstraintComponent")  
-export const InConstraintComponent = sh("InConstraintComponent")  
-export const JSConstraintComponent = sh("JSConstraintComponent")  
-export const LanguageInConstraintComponent = sh("LanguageInConstraintComponent")  
-export const LessThanConstraintComponent = sh("LessThanConstraintComponent")  
-export const LessThanOrEqualsConstraintComponent = sh("LessThanOrEqualsConstraintComponent")  
-export const MaxCountConstraintComponent = sh("MaxCountConstraintComponent")  
-export const MaxExclusiveConstraintComponent = sh("MaxExclusiveConstraintComponent")  
-export const MaxInclusiveConstraintComponent = sh("MaxInclusiveConstraintComponent")  
-export const MaxLengthConstraintComponent = sh("MaxLengthConstraintComponent")  
-export const MinCountConstraintComponent = sh("MinCountConstraintComponent")  
-export const MinExclusiveConstraintComponent = sh("MinExclusiveConstraintComponent")  
-export const MinInclusiveConstraintComponent = sh("MinInclusiveConstraintComponent")  
-export const MinLengthConstraintComponent = sh("MinLengthConstraintComponent")  
-export const NodeConstraintComponent = sh("NodeConstraintComponent")  
-export const NodeKindConstraintComponent = sh("NodeKindConstraintComponent")  
-export const NotConstraintComponent = sh("NotConstraintComponent")  
-export const OrConstraintComponent = sh("OrConstraintComponent")  
-export const PatternConstraintComponent = sh("PatternConstraintComponent")  
-export const PropertyConstraintComponent = sh("PropertyConstraintComponent")  
-export const QualifiedMaxCountConstraintComponent = sh("QualifiedMaxCountConstraintComponent")  
-export const QualifiedMinCountConstraintComponent = sh("QualifiedMinCountConstraintComponent")  
-export const SPARQLConstraintComponent = sh("SPARQLConstraintComponent")  
-export const UniqueLangConstraintComponent = sh("UniqueLangConstraintComponent")  
-export const XoneConstraintComponent = sh("XoneConstraintComponent")  
-export const BlankNode = sh("BlankNode")  
-export const BlankNodeOrIRI = sh("BlankNodeOrIRI")  
-export const BlankNodeOrLiteral = sh("BlankNodeOrLiteral")  
-export const IRI = sh("IRI")  
-export const IRIOrLiteral = sh("IRIOrLiteral")  
-export const Literal = sh("Literal")  
-export const Info = sh("Info")  
-export const Violation = sh("Violation")  
-export const Warning = sh("Warning")  
-
-
+export default {
+  "alternativePath": sh("alternativePath"),
+  "annotationProperty": sh("annotationProperty"),
+  "annotationValue": sh("annotationValue"),
+  "annotationVarName": sh("annotationVarName"),
+  "ask": sh("ask"),
+  "closed": sh("closed"),
+  "condition": sh("condition"),
+  "conforms": sh("conforms"),
+  "construct": sh("construct"),
+  "datatype": sh("datatype"),
+  "deactivated": sh("deactivated"),
+  "declare": sh("declare"),
+  "defaultValue": sh("defaultValue"),
+  "description": sh("description"),
+  "detail": sh("detail"),
+  "disjoint": sh("disjoint"),
+  "entailment": sh("entailment"),
+  "equals": sh("equals"),
+  "expression": sh("expression"),
+  "filterShape": sh("filterShape"),
+  "flags": sh("flags"),
+  "focusNode": sh("focusNode"),
+  "group": sh("group"),
+  "hasValue": sh("hasValue"),
+  "ignoredProperties": sh("ignoredProperties"),
+  "intersection": sh("intersection"),
+  "inversePath": sh("inversePath"),
+  "js": sh("js"),
+  "jsFunctionName": sh("jsFunctionName"),
+  "jsLibrary": sh("jsLibrary"),
+  "jsLibraryURL": sh("jsLibraryURL"),
+  "labelTemplate": sh("labelTemplate"),
+  "languageIn": sh("languageIn"),
+  "lessThan": sh("lessThan"),
+  "lessThanOrEquals": sh("lessThanOrEquals"),
+  "maxCount": sh("maxCount"),
+  "maxExclusive": sh("maxExclusive"),
+  "maxInclusive": sh("maxInclusive"),
+  "maxLength": sh("maxLength"),
+  "message": sh("message"),
+  "minCount": sh("minCount"),
+  "minExclusive": sh("minExclusive"),
+  "minInclusive": sh("minInclusive"),
+  "minLength": sh("minLength"),
+  "name": sh("name"),
+  "namespace": sh("namespace"),
+  "node": sh("node"),
+  "nodeKind": sh("nodeKind"),
+  "nodeValidator": sh("nodeValidator"),
+  "nodes": sh("nodes"),
+  "object": sh("object"),
+  "oneOrMorePath": sh("oneOrMorePath"),
+  "optional": sh("optional"),
+  "order": sh("order"),
+  "parameter": sh("parameter"),
+  "path": sh("path"),
+  "pattern": sh("pattern"),
+  "predicate": sh("predicate"),
+  "prefix": sh("prefix"),
+  "prefixes": sh("prefixes"),
+  "property": sh("property"),
+  "propertyValidator": sh("propertyValidator"),
+  "qualifiedMaxCount": sh("qualifiedMaxCount"),
+  "qualifiedMinCount": sh("qualifiedMinCount"),
+  "qualifiedValueShape": sh("qualifiedValueShape"),
+  "qualifiedValueShapesDisjoint": sh("qualifiedValueShapesDisjoint"),
+  "result": sh("result"),
+  "resultAnnotation": sh("resultAnnotation"),
+  "resultMessage": sh("resultMessage"),
+  "resultPath": sh("resultPath"),
+  "resultSeverity": sh("resultSeverity"),
+  "returnType": sh("returnType"),
+  "rule": sh("rule"),
+  "select": sh("select"),
+  "severity": sh("severity"),
+  "shapesGraph": sh("shapesGraph"),
+  "shapesGraphWellFormed": sh("shapesGraphWellFormed"),
+  "sourceConstraint": sh("sourceConstraint"),
+  "sourceConstraintComponent": sh("sourceConstraintComponent"),
+  "sourceShape": sh("sourceShape"),
+  "sparql": sh("sparql"),
+  "subject": sh("subject"),
+  "suggestedShapesGraph": sh("suggestedShapesGraph"),
+  "target": sh("target"),
+  "targetClass": sh("targetClass"),
+  "targetNode": sh("targetNode"),
+  "targetObjectsOf": sh("targetObjectsOf"),
+  "targetSubjectsOf": sh("targetSubjectsOf"),
+  "union": sh("union"),
+  "uniqueLang": sh("uniqueLang"),
+  "update": sh("update"),
+  "validator": sh("validator"),
+  "value": sh("value"),
+  "xone": sh("xone"),
+  "zeroOrMorePath": sh("zeroOrMorePath"),
+  "zeroOrOnePath": sh("zeroOrOnePath"),
+  "AbstractResult": sh("AbstractResult"),
+  "ConstraintComponent": sh("ConstraintComponent"),
+  "Function": sh("Function"),
+  "JSConstraint": sh("JSConstraint"),
+  "JSExecutable": sh("JSExecutable"),
+  "JSFunction": sh("JSFunction"),
+  "JSLibrary": sh("JSLibrary"),
+  "JSRule": sh("JSRule"),
+  "JSTarget": sh("JSTarget"),
+  "JSTargetType": sh("JSTargetType"),
+  "JSValidator": sh("JSValidator"),
+  "NodeKind": sh("NodeKind"),
+  "NodeShape": sh("NodeShape"),
+  "Parameter": sh("Parameter"),
+  "Parameterizable": sh("Parameterizable"),
+  "PrefixDeclaration": sh("PrefixDeclaration"),
+  "PropertyGroup": sh("PropertyGroup"),
+  "PropertyShape": sh("PropertyShape"),
+  "ResultAnnotation": sh("ResultAnnotation"),
+  "Rule": sh("Rule"),
+  "SPARQLAskExecutable": sh("SPARQLAskExecutable"),
+  "SPARQLAskValidator": sh("SPARQLAskValidator"),
+  "SPARQLConstraint": sh("SPARQLConstraint"),
+  "SPARQLConstructExecutable": sh("SPARQLConstructExecutable"),
+  "SPARQLExecutable": sh("SPARQLExecutable"),
+  "SPARQLFunction": sh("SPARQLFunction"),
+  "SPARQLRule": sh("SPARQLRule"),
+  "SPARQLSelectExecutable": sh("SPARQLSelectExecutable"),
+  "SPARQLSelectValidator": sh("SPARQLSelectValidator"),
+  "SPARQLTarget": sh("SPARQLTarget"),
+  "SPARQLTargetType": sh("SPARQLTargetType"),
+  "SPARQLUpdateExecutable": sh("SPARQLUpdateExecutable"),
+  "Severity": sh("Severity"),
+  "Shape": sh("Shape"),
+  "Target": sh("Target"),
+  "TargetType": sh("TargetType"),
+  "TripleRule": sh("TripleRule"),
+  "ValidationReport": sh("ValidationReport"),
+  "ValidationResult": sh("ValidationResult"),
+  "Validator": sh("Validator"),
+  "this": sh("this"),
+  "AndConstraintComponent": sh("AndConstraintComponent"),
+  "ClassConstraintComponent": sh("ClassConstraintComponent"),
+  "ClosedConstraintComponent": sh("ClosedConstraintComponent"),
+  "DatatypeConstraintComponent": sh("DatatypeConstraintComponent"),
+  "DisjointConstraintComponent": sh("DisjointConstraintComponent"),
+  "EqualsConstraintComponent": sh("EqualsConstraintComponent"),
+  "ExpressionConstraintComponent": sh("ExpressionConstraintComponent"),
+  "HasValueConstraintComponent": sh("HasValueConstraintComponent"),
+  "InConstraintComponent": sh("InConstraintComponent"),
+  "JSConstraintComponent": sh("JSConstraintComponent"),
+  "LanguageInConstraintComponent": sh("LanguageInConstraintComponent"),
+  "LessThanConstraintComponent": sh("LessThanConstraintComponent"),
+  "LessThanOrEqualsConstraintComponent": sh(
+    "LessThanOrEqualsConstraintComponent",
+  ),
+  "MaxCountConstraintComponent": sh("MaxCountConstraintComponent"),
+  "MaxExclusiveConstraintComponent": sh("MaxExclusiveConstraintComponent"),
+  "MaxInclusiveConstraintComponent": sh("MaxInclusiveConstraintComponent"),
+  "MaxLengthConstraintComponent": sh("MaxLengthConstraintComponent"),
+  "MinCountConstraintComponent": sh("MinCountConstraintComponent"),
+  "MinExclusiveConstraintComponent": sh("MinExclusiveConstraintComponent"),
+  "MinInclusiveConstraintComponent": sh("MinInclusiveConstraintComponent"),
+  "MinLengthConstraintComponent": sh("MinLengthConstraintComponent"),
+  "NodeConstraintComponent": sh("NodeConstraintComponent"),
+  "NodeKindConstraintComponent": sh("NodeKindConstraintComponent"),
+  "NotConstraintComponent": sh("NotConstraintComponent"),
+  "OrConstraintComponent": sh("OrConstraintComponent"),
+  "PatternConstraintComponent": sh("PatternConstraintComponent"),
+  "PropertyConstraintComponent": sh("PropertyConstraintComponent"),
+  "QualifiedMaxCountConstraintComponent": sh(
+    "QualifiedMaxCountConstraintComponent",
+  ),
+  "QualifiedMinCountConstraintComponent": sh(
+    "QualifiedMinCountConstraintComponent",
+  ),
+  "SPARQLConstraintComponent": sh("SPARQLConstraintComponent"),
+  "UniqueLangConstraintComponent": sh("UniqueLangConstraintComponent"),
+  "XoneConstraintComponent": sh("XoneConstraintComponent"),
+  "BlankNode": sh("BlankNode"),
+  "BlankNodeOrIRI": sh("BlankNodeOrIRI"),
+  "BlankNodeOrLiteral": sh("BlankNodeOrLiteral"),
+  "IRI": sh("IRI"),
+  "IRIOrLiteral": sh("IRIOrLiteral"),
+  "Literal": sh("Literal"),
+  "Info": sh("Info"),
+  "Violation": sh("Violation"),
+  "Warning": sh("Warning"),
+};
