@@ -1,0 +1,27 @@
+{
+  "version": "2",
+  "remote": {
+    "https://deno.land/x/aloedb@0.9.0/lib/core.ts": "1dde5be37471c5a9d65cc86b7e19203456c3cc66ac89a32b60ddc3b66e7606ef",
+    "https://deno.land/x/aloedb@0.9.0/lib/database.ts": "4463ea3d5860ef5c6e594a518fb80c3d167f0e664f6f49d6b29c2f76ca186d0e",
+    "https://deno.land/x/aloedb@0.9.0/lib/helpers.ts": "9e0a8a9c52136246f6c3ca0b169f0b6d4e2db3b2c5b3b526ade5b2ff7d26429f",
+    "https://deno.land/x/aloedb@0.9.0/lib/reader.ts": "4f293abf368a2c5eefd8b7e52c6474f3bc9420e5be8105bc39b35fadda716981",
+    "https://deno.land/x/aloedb@0.9.0/lib/types.ts": "e099cd43684658d28c2c0c52f595acbac44193ca7bf9294db508f9fd4591fcc1",
+    "https://deno.land/x/aloedb@0.9.0/lib/utils.ts": "d8139e452d009c7d2ce0335abd7da466b0536188bc52f46f1df499a64920c9ba",
+    "https://deno.land/x/aloedb@0.9.0/lib/writer.ts": "834f961f60c86d1a65caf963dbc34ff59f863706fbb3e2f026444f028bae6634",
+    "https://deno.land/x/aloedb@0.9.0/mod.ts": "f1aa9beb667cc055886647b5e8998b51046a58ac35251b42ddc68eec43502f83",
+    "https://denopkg.com/xubaiw/deno-rdflib@main/mod.ts": "0a60e22251685301056dc1ba55d1ecbf2ee2f23cd4b638ea271c44ebb04510f1",
+    "https://denopkg.com/xubaiw/deno-rdflib@main/model.ts": "51900fbf40508ef61bf18707e48deb05b8eb61ca3c4e6e3c31e47d9e91eec4d7",
+    "https://denopkg.com/xubaiw/deno-rdflib@main/store.ts": "b46a74be0ffef1bc44f1d90e81d1de6256fa5e9b408fe9270ddeb5d8aaa5afe9"
+  },
+  "npm": {
+    "specifiers": {
+      "rambda": "rambda@7.5.0"
+    },
+    "packages": {
+      "rambda@7.5.0": {
+        "integrity": "sha512-y/M9weqWAH4iopRd7EHDEQQvpFPHj1AA3oHozE9tfITHUtTR7Z9PSlIRRG2l1GuW7sefC1cXFfIcF+cgnShdBA==",
+        "dependencies": {}
+      }
+    }
+  }
+}
