@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.152.0/testing/asserts.ts";
-import { DataFactory, equal } from "../src/model.ts";
+import { DataFactory, equal } from "../model.ts";
 
 const f = new DataFactory();
 

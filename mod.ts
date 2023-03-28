@@ -1,2 +1,2 @@
-export * from "./src/model.ts";
-export * from "./src/store.ts";
+export * from "./model.ts";
+export * from "./store.ts";
