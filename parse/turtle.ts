@@ -26,9 +26,8 @@ import {
   Literal,
   NamedNode,
   Quad,
-  QuadObject,
-  QuadPredicate,
-  QuadSubject,
+  Term,
+  Subject,
 } from "../model.ts";
 
 type BaseDef = {
@@ -39,7 +38,7 @@ type PrefixDef = {
   prefixIRI: string;
 };
 type PredicateObjects = {
-  predicate: QuadPredicate;
+  predicate: NamedNode;
   objects: TTLObject[];
 };
 type BlankNodePropertyList = {
@@ -61,7 +60,7 @@ type TTLObject =
   | BlankNodePropertyList;
 type TTLTriple = {
   subject: TTLSubject;
-  predicate: QuadPredicate;
+  predicate: NamedNode;
   object: TTLObject;
 };
 type TTLDirective = PrefixDef | BaseDef;
@@ -78,9 +77,9 @@ export type Language = {
   triples: Parser<TTLTriple[]>;
   predicateObjectList: Parser<PredicateObjects[]>;
   objectList: Parser<TTLObject[]>;
-  verb: Parser<QuadPredicate>;
+  verb: Parser<NamedNode>;
   subject: Parser<TTLSubject>;
-  predicate: Parser<QuadPredicate>;
+  predicate: Parser<NamedNode>;
   object: Parser<TTLObject>;
   literal: Parser<Literal>;
   blankNodePropertyList: Parser<BlankNodePropertyList>;
@@ -160,7 +159,7 @@ function triplesToQuads(
     }
     return blanks[0];
   }
-  function extendObject(o: TTLObject): QuadObject | string {
+  function extendObject(o: TTLObject): Term | string {
     if (Array.isArray(o)) return extendCollection(o);
     if ("prefix" in o) return extendPrefixedName(o);
     if ('propertyList' in o) {
@@ -169,7 +168,7 @@ function triplesToQuads(
     }
     return o;
   }
-  function extendSubject(s: TTLSubject): QuadSubject | string {
+  function extendSubject(s: TTLSubject): Subject | string {
     if (Array.isArray(s)) return extendCollection(s);
     if ("prefix" in s) return extendPrefixedName(s);
     return s;
