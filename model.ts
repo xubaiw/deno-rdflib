@@ -1,77 +1,77 @@
 import xsd from "./vocabs/xsd.ts";
+import rdf from "./vocabs/rdf.ts";
+import { equal as teq } from "https://deno.land/std@0.194.0/testing/asserts.ts";
 
-export type Triple = {
-  tag: "triple";
-  subject: Subject;
-  predicate: NamedNode;
-  object: Term;
-};
+export type Term =
+  | NamedNode
+  | BlankNode
+  | Literal
+  | Triple;
 
-export function triple(
-  subject: Subject,
-  predicate: NamedNode,
-  object: Term,
-): Triple {
-  return { tag: "triple", subject, predicate, object };
-}
+export type Subject =
+  | NamedNode
+  | BlankNode
+  | Triple;
 
-export type BlankNode = {
-  tag: "blank";
-  id: string;
-};
-
-export function blankNode(id: string): BlankNode {
-  return { tag: "blank", id };
-}
+export type GraphName =
+  | NamedNode
+  | BlankNode
+  | null;
 
 export type NamedNode = {
-  tag: "named";
   iri: string;
 };
 
-export function namedNode(iri: string): NamedNode {
-  return { tag: "named", iri };
-}
+export type BlankNode = {
+  id: string;
+};
 
-export type Quad = {
-  tag: "quad";
+export type Literal = {
+  lexical: string;
+  datatype: NamedNode;
+  language: string;
+};
+
+export type Triple = {
   subject: Subject;
   predicate: NamedNode;
   object: Term;
-  graph?: GraphName;
 };
 
-export function quad(
+/** Use `null` for default graph */
+export type Quad =
+  & Triple
+  & { graph: GraphName };
+
+export const namedNode = (iri: string): NamedNode => ({ iri });
+
+export const blankNode = (id: string): BlankNode => ({ id });
+
+export const literal = (
+  lexical: string,
+  datatype?: NamedNode,
+  language?: string,
+): Literal => ({
+  lexical,
+  datatype: datatype ?? language ? rdf.langString : xsd.string,
+  language: language ?? "",
+});
+
+export const triple = (
+  subject: Subject,
+  predicate: NamedNode,
+  object: Term,
+): Triple => ({ subject, predicate, object });
+
+export const quad = (
   subject: Subject,
   predicate: NamedNode,
   object: Term,
   graph?: GraphName,
-): Quad {
-  return { tag: "quad", subject, predicate, object, graph };
-}
+): Quad => ({ subject, predicate, object, graph: graph ?? null });
 
-export type Literal = {
-  tag: "literal";
-  value: string;
-  language?: string;
-  datatype: NamedNode;
-};
-
-export function literal(
-  value: string,
-  datatype?: NamedNode,
-  language?: string,
-): Literal {
-  return {
-    tag: "literal",
-    value: value.toString(),
-    datatype: datatype ?? xsd.string,
-    language,
-  };
-}
-
-export type GraphName = NamedNode | BlankNode;
-
-export type Subject = NamedNode | BlankNode | Triple;
-
-export type Term = NamedNode | BlankNode | Literal | Triple;
+/** Check deep equal */
+export const equal = (
+  t1: Term | Quad | undefined | null,
+  t2: Term | Quad | undefined | null,
+) => teq(t1, t2);
