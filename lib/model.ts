@@ -1,5 +1,4 @@
 import xsd from "./vocabs/xsd.ts";
-import rdf from "./vocabs/rdf.ts";
 import { equal as teq } from "https://deno.land/std@0.194.0/testing/asserts.ts";
 
 export type Term =
@@ -28,8 +27,7 @@ export type BlankNode = {
 
 export type Literal = {
   lexical: string;
-  datatype: NamedNode;
-  language: string;
+  langOrDatatype: string | NamedNode;
 };
 
 export type Triple = {
@@ -49,12 +47,11 @@ export const blankNode = (id: string): BlankNode => ({ id });
 
 export const literal = (
   lexical: string,
-  datatype?: NamedNode,
-  language?: string,
+  langOrDatatype?: NamedNode | string,
 ): Literal => ({
   lexical,
-  datatype: datatype ?? language ? rdf.langString : xsd.string,
-  language: language ?? "",
+  langOrDatatype: langOrDatatype ??
+    { iri: "http://www.w3.org/2001/XMLSchema#string" },
 });
 
 export const triple = (
