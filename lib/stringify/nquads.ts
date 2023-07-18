@@ -11,7 +11,7 @@ export const stringify = (quads: Iterable<Quad>): string => {
   return str;
 };
 
-const stringifyTerm = (term: Term | null): string => {
+export const stringifyTerm = (term: Term | null): string => {
   // DefaultGraph
   if (term == null) return "";
   // NamedNode
