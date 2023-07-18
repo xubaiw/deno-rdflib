@@ -1,7 +1,8 @@
-import { Database } from "https://deno.land/x/aloedb@0.9.0/mod.ts";
 import { Quad } from "./model.ts";
 
-/** Store is just a database of quads */
-export function useStore(path?: string): Promise<Database<Quad>> {
-  return Deno.openKv(path);
-}
+export type Dataset = {
+  quads: Quad[];
+};
+
+/** Create Instance of `Dataset` */
+export const dataset = (quads: Iterable<Quad> = []) => ({ quads });
