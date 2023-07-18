@@ -1,3 +1,3 @@
-export * from "./model.ts";
-export * from "./store.ts";
-export * from "./vocabs/utils.ts";
+export * from "./lib/model.ts";
+export * from "./lib/store.ts";
+export * from "./lib/vocabs/utils.ts";
